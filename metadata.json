@@ -1,0 +1,6 @@
+{
+  "name": "Travel With Shubham",
+  "description": "Explore India, One Journey At A Time. Personal travel portfolio of Shubham.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

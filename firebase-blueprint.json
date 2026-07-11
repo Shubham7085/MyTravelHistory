@@ -1,0 +1,137 @@
+{
+  "entities": {
+    "Trip": {
+      "title": "Trip",
+      "description": "A travel journey containing photos, videos, and metadata.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "location": { "type": "string" },
+        "duration": { "type": "string" },
+        "startDate": { "type": "string" },
+        "coverImage": { "type": "string" },
+        "photosCount": { "type": "integer" },
+        "videosCount": { "type": "integer" },
+        "state": { "type": "string" },
+        "distance": { "type": "integer" },
+        "tags": { "type": "array" },
+        "photos": { "type": "array" },
+        "videos": { "type": "array" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "location", "duration", "coverImage", "state", "photosCount", "videosCount", "distance"]
+    },
+    "Photo": {
+      "title": "Photo",
+      "description": "An image captured during a trip.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "tripId": { "type": "string" },
+        "url": { "type": "string" },
+        "caption": { "type": "string" },
+        "location": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "isFeatured": { "type": "boolean" }
+      },
+      "required": ["id", "tripId", "url", "createdAt", "isFeatured"]
+    },
+    "Video": {
+      "title": "Video",
+      "description": "A video clip captured during a trip.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "tripId": { "type": "string" },
+        "url": { "type": "string" },
+        "title": { "type": "string" },
+        "duration": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "caption": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "tripId", "url", "title", "createdAt", "thumbnail", "duration"]
+    },
+    "Stats": {
+      "title": "Stats",
+      "description": "Overall aggregated travel statistics.",
+      "type": "object",
+      "properties": {
+        "trips": { "type": "integer" },
+        "photos": { "type": "integer" },
+        "videos": { "type": "integer" },
+        "states": { "type": "integer" },
+        "distance": { "type": "integer" },
+        "yearsExploring": { "type": "integer" }
+      },
+      "required": ["trips", "photos", "videos", "states", "distance", "yearsExploring"]
+    },
+    "DriveConfig": {
+      "title": "DriveConfig",
+      "description": "Google Drive account allocation and storage configuration details.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "rootFolderId": { "type": "string" },
+        "totalStorage": { "type": "integer" },
+        "usedStorage": { "type": "integer" },
+        "remainingStorage": { "type": "integer" },
+        "healthStatus": { "type": "string", "enum": ["healthy", "degraded", "offline"] },
+        "connectedStatus": { "type": "string", "enum": ["connected", "disconnected"] },
+        "lastSyncTime": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "rootFolderId", "totalStorage", "usedStorage", "remainingStorage", "healthStatus", "connectedStatus", "lastSyncTime"]
+    },
+    "MediaReference": {
+      "title": "MediaReference",
+      "description": "Direct Google Drive file upload mapping and trip reference logs.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fileName": { "type": "string" },
+        "tripId": { "type": "string" },
+        "driveId": { "type": "string" },
+        "folderId": { "type": "string" },
+        "fileId": { "type": "string" },
+        "downloadUrl": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "mimeType": { "type": "string" },
+        "fileSize": { "type": "integer" },
+        "createdAt": { "type": "string" },
+        "caption": { "type": "string" },
+        "location": { "type": "string" }
+      },
+      "required": ["id", "fileName", "tripId", "driveId", "folderId", "fileId", "downloadUrl", "thumbnailUrl", "mimeType", "fileSize", "createdAt"]
+    }
+  },
+  "firestore": {
+    "trips/{tripId}": {
+      "schema": "Trip",
+      "description": "List of travel journeys across India."
+    },
+    "photos/{photoId}": {
+      "schema": "Photo",
+      "description": "Photos captured from various trips."
+    },
+    "videos/{videoId}": {
+      "schema": "Video",
+      "description": "Videos captured from various trips."
+    },
+    "stats/{statsId}": {
+      "schema": "Stats",
+      "description": "General aggregated counters for travels."
+    },
+    "drive_configurations/{driveId}": {
+      "schema": "DriveConfig",
+      "description": "Distributed Google Drive configuration objects."
+    },
+    "media_references/{referenceId}": {
+      "schema": "MediaReference",
+      "description": "Media mappings and reference logs."
+    }
+  }
+}
